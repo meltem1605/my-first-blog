@@ -1,22 +1,12 @@
-<html>
-    <head>
-        <title>Little Miss Darkness</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Little Miss Darkness</a></h1>
-        </div>
+{% extends "blog/base.html" %}
 
-        <div>
-            <p>published: 04.06.2015, 14.44</p>
-            <h2><a href="">The first one</a></h2>
-            <p>Hallöchen, ihr Lieben</p>
+{% block content %}
+{% for post in posts %}
+    <div class="post">
+        <div class="date">
+            {{ post.published_date }}
         </div>
-
-        <div>
-            <p>published: 04.06.2015, 14.55</p>
-            <h2><a href="">The second one</a></h2>
-            <p>Herzliche Grüße aus München</p>
-        </div>
-    </body>
-</html>
+        <h1><a href="{% url "blog.views.post_detail" pk=post.pk %}">{{ post.title }}</a></h1>        <p>{{ post.text|linebreaks }}</p>
+    </div>
+{% endfor %}
+{% endblock content %}
